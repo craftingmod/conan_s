@@ -88,24 +88,29 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(ProjectDir)lib\pdcurses.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(ProjectDir)lib\pdcurses.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -143,38 +148,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="alphalist.h" />
-    <ClInclude Include="binding.h" />
-    <ClInclude Include="button.h" />
-    <ClInclude Include="buttonbox.h" />
-    <ClInclude Include="calendar.h" />
-    <ClInclude Include="cdk.h" />
-    <ClInclude Include="cdkscreen.h" />
-    <ClInclude Include="cdk_compat.h" />
-    <ClInclude Include="cdk_int.h" />
-    <ClInclude Include="cdk_objs.h" />
-    <ClInclude Include="cdk_params.h" />
-    <ClInclude Include="cdk_test.h" />
-    <ClInclude Include="cdk_util.h" />
-    <ClInclude Include="curdefs.h" />
-    <ClInclude Include="dialog.h" />
-    <ClInclude Include="draw.h" />
-    <ClInclude Include="entry.h" />
-    <ClInclude Include="fselect.h" />
-    <ClInclude Include="gen-scale.h" />
-    <ClInclude Include="gen-slider.h" />
-    <ClInclude Include="graph.h" />
-    <ClInclude Include="histogram.h" />
-    <ClInclude Include="itemlist.h" />
-    <ClInclude Include="label.h" />
-    <ClInclude Include="marquee.h" />
-    <ClInclude Include="matrix.h" />
-    <ClInclude Include="mentry.h" />
-    <ClInclude Include="menu.h" />
-    <ClInclude Include="radio.h" />
-    <ClInclude Include="scroll.h" />
-    <ClInclude Include="scroller.h" />
-    <ClInclude Include="selection.h" />
+    <ClInclude Include="appinfo.h" />
+    <ClInclude Include="data.h" />
+    <ClInclude Include="decision.h" />
+    <ClInclude Include="include\curses.h" />
+    <ClInclude Include="include\panel.h" />
+    <ClInclude Include="include\tui.h" />
+    <ClInclude Include="play.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="swindow.h" />
     <ClInclude Include="targetver.h" />
@@ -183,12 +163,24 @@
     <ClInclude Include="viewer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Conan.c" />
+    <ClCompile Include="appinfo.c" />
+    <ClCompile Include="C:\pd\demos\testcurs.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="data.c" />
+    <ClCompile Include="decision.c" />
+    <ClCompile Include="main.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="play.c" />
     <ClCompile Include="stdafx.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="tui.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

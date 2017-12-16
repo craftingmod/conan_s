@@ -21,120 +21,51 @@
     <ClInclude Include="targetver.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="cdk_int.h">
+    <ClInclude Include="appinfo.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="cdk_objs.h">
+    <ClInclude Include="include\panel.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="cdk_params.h">
+    <ClInclude Include="include\tui.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="cdk_test.h">
+    <ClInclude Include="include\curses.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="cdk_util.h">
+    <ClInclude Include="play.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="cdkscreen.h">
+    <ClInclude Include="decision.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="curdefs.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="dialog.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="draw.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="entry.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="fselect.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="gen-scale.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="gen-slider.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="graph.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="histogram.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="itemlist.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="label.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="marquee.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="matrix.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="mentry.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="menu.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="radio.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="scroll.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="scroller.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="selection.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="swindow.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="template.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="traverse.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="viewer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="alphalist.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="binding.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="button.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="buttonbox.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="calendar.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cdk.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cdk_compat.h">
+    <ClInclude Include="data.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Conan.c">
+    <ClCompile Include="stdafx.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.c">
+    <ClCompile Include="main.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="tui.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\pd\demos\testcurs.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="play.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="appinfo.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="decision.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="data.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
