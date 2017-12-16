@@ -1,4 +1,7 @@
-
+/*
+ * Include macro
+ */
+#include "stdafx.h"
 #include "play.h"
 #include "decision.h"
 #include "tui.h"
@@ -6,21 +9,60 @@
 #include "fmod.h"
 #include "playm.h"
 #include "config_conan.h"
-
-int Point[1000];//포인트 초기화 음악 갯수대로
-
-struct command
-{
-	const wchar_t *text;
-	void(*function)(WINDOW *);
-};
-typedef struct command COMMAND;
-
-
+/*
+ * Define macro
+ */
 #define MAX_OPTIONS 5
 
-int AN;
-int AD;
+/*
+ * Declare functions
+ */
+void closeQuest(void);
+
+void AnswerYes(void);
+void AnswerMaybeYes(void);
+void AnswerUnknown(void);
+void AnswerMaybeNot(void);
+void AnswerNo(void);
+
+void display_menu(int, int);
+int listbox(void);
+void printBodyInt(int);
+
+void PlayMode(int);
+void PlayResult(int);
+void PlayGiveUp(int);
+
+void initPlay(void);
+void startPlay(int);
+
+int getRandInt(int, int);
+
+int decesion(int, int);
+int getQuestionNumber(void);
+int ASearch(const int [], int,int);
+
+/*
+ * Define structure
+ */
+typedef struct command {
+	const wchar_t *text;
+	void(*function)(WINDOW *);
+} COMMAND;
+
+/*
+ * Define variables
+ */
+int Point[100];//포인트 초기화 음악 갯수대로
+int TAGS_COUNT;
+int TAGS_MAX_COUNT;
+int MUSIC_COUNT;
+int PLAY_STATUS; // 0: startplay 1:  playing 2: result 3: give up
+int QUESTION_SRL; //질문 넘버
+int QUESTION_TRY_COUNT; //지금까지 한 질문 횟수
+int SELECTED_ANSWER;
+int readyForShowResult; //0: not yet 1:thinking 2: result
+int readyForShowResultCount;
 
 SndSystem *mSystem = NULL;
 SndSound *mSound = NULL;
@@ -36,8 +78,9 @@ COMMAND command[MAX_OPTIONS] =
 
 };
 
-void closeQuest();
-
+/*
+ * Define functions
+ */
 void AnswerYes() {
 	SELECTED_ANSWER = 5;
 }
@@ -163,6 +206,7 @@ int listbox()
 		case 'Q':
 		case 'q':
 			quit = TRUE;
+			break;
 		case KEY_ESC:
 			quit = TRUE;
 			clsbody();

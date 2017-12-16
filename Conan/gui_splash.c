@@ -1,6 +1,5 @@
 #include <stdio.h>
-#include "curses.h"
-#include "panel.h"
+#include "tui.h"
 #include "playm.h"
 #include "fmod.h"
 #include "config_conan.h"
