@@ -98,6 +98,7 @@ void splash() {
 			if (WaitForUser() >= 0){
 				break;
 			}
+			break;
 		}
 		break;
 	}

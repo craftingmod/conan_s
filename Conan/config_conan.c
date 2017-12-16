@@ -16,7 +16,7 @@
 
 #define NO_PSEUDO_JH 0
 
-#ifdef _MSC_VER
+#ifndef _MSC_VER
    # define _PSEUDO_JHRUNNING !NO_PSEUDO_JH
 #else
 # define _PSEUDO_JHRUNNING 0
