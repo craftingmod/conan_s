@@ -22,7 +22,7 @@
 # define _PSEUDO_JHRUNNING 0
 #endif
 /* Version Field */
-const wchar_t *appversion = L"1.0.1216";
+const wchar_t *appversion = L"1.0.1217";
 
 /* Music Field */
 struct Tag tags[] = {

@@ -61,8 +61,8 @@ int main(int argc, char **argv)
 	splash();
 	//printf("%s", aa);
 	
-	startmenu(MainMenu,"Conan - The Music Detective (Beta Version)");
-	wchar_t *des = L"개발중인 버전입니다. Under Construction";
+	startmenu(MainMenu,"Conan - The Music Detective");
+//	wchar_t *des = L"개발중인 버전입니다. Under Construction";
 
 
 	//wchar_t *ws2 = L"동하! 동현이 하이라는뜻";
