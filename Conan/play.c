@@ -106,26 +106,6 @@ int listbox()
 
 		switch (key)
 		{
-		case KEY_MOUSE:
-		{
-			const int tmarg = (LINES - (5 + 2)) / 2;
-			int selected_opt;
-			MEVENT mouse_event;
-
-			nc_getmouse(&mouse_event);
-
-			selected_opt = mouse_event.y - tmarg;
-			if (selected_opt >= 0 && selected_opt < 5)
-			{
-				old_option = new_option;
-				new_option = selected_opt;
-				display_menu(old_option, new_option);
-			}
-			if (mouse_event.bstate & BUTTON1_DOUBLE_CLICKED)
-				key = 10;
-		}
-		if (key != 10)
-			break;
 		case 10:
 		case 13:
 		case KEY_ENTER:
@@ -142,6 +122,7 @@ int listbox()
 			//if(new_option == 1) beep();
 			startPlay(SELECTED_ANSWER);
 			//display_menu(old_option, new_option);
+			//QUIT = true
 			break;
 
 		case KEY_PPAGE:
@@ -186,6 +167,7 @@ int listbox()
 			quit = TRUE;
 			clsbody();
 			bodymsg(L"\n\n\n\n\n\nESC를 눌러 플레이를 종료했습니다.");
+			break;
 
 		}
 
@@ -222,12 +204,17 @@ void PlayMode(int questnum) {
 	bodymsg(L"                                /:      \n");
 	bodymsg(L"                   `.-----.`    oys.    \n");
 	bodymsg(L"               ./oyddddddddhy+-`yyo``   \n");
-	bodymsg(L"     `.-:::-./ydmmmmmmmmmmmmmmdyhs:-  ====================================================================  \n");
+	bodymsg(L"     `.-:::-./ydmmmmmmmmmmmmmmdyhs:-  =================================================   \n");
 	bodymsg(L"     ` `:+sydmmmmmmmmmmmmmmmmdmmdo    "); printBodyInt(QUESTION_TRY_COUNT); bodymsg(L". ");  bodymsg(question);   bodymsg(L"\n");
-	bodymsg(L"     `+hhhhdmmmmdmmmmmmmmmmmmdhddh:   ====================================================================   \n");
+	bodymsg(L"     `+hhhhdmmmmdmmmmmmmmmmmmdhddh:   =================================================   \n");
 	bodymsg(L"    `ys/yddmdmmmhdmmmmmmmmmmmmmmmd+     \n");
 	bodymsg(L"    :- ssomsdsymmddymddhyydmhdmmmm:     \n");
 	bodymsg(L"       s-.yshoyyhdmdhy+shyyyyosmmy      \n");
+	if (readyForShowResult != 2) {
+		bodymsg(L"       `..+hs  ●oyyds+.  ● +so+/.      \n");
+	}else{
+		bodymsg(L"       `..+hs  ╂oyyds+.  ╂ +so+/.      \n");
+	}
 	bodymsg(L"       `..+hs//:yoyyds+/:.:y+so+/.      \n");
 	bodymsg(L"          .:o-.:s:--//---://-:++:       \n");
 	bodymsg(L"           .:+:::/:--::::::::::.        \n");
@@ -263,15 +250,15 @@ void PlayMode(int questnum) {
 	bodymsg(L"                                /:      \n");
 	bodymsg(L"                   `.-----.`    oys.    \n");
 	bodymsg(L"               ./oyddddddddhy+-`yyo``  추리 결과 \n");
-	bodymsg(L"     `.-:::-./ydmmmmmmmmmmmmmmdyhs:-  ====================================================================  \n");
+	bodymsg(L"     `.-:::-./ydmmmmmmmmmmmmmmdyhs:-  =======================================================  \n");
 	bodymsg(L"     ` `:+sydmmmmmmmmmmmmmmmmdmmdo     바보같은 녀석, 추리에는 이기고 지는 것도 위도 아래도 없어.\n");
 	bodymsg(L"     `+hhhhdmmmmdmmmmmmmmmmmmdhddh:    진실은 언제나 단 하나뿐이니까. \n");
-	bodymsg(L"    `ys/yddmdmmmhdmmmmmmmmmmmmmmmd+   ====================================================================     \n");
+	bodymsg(L"    `ys/yddmdmmmhdmmmmmmmmmmmmmmmd+   =======================================================  \n");
 	bodymsg(L"    :- ssomsdsymmddymddhyydmhdmmmm:     \n");
-	bodymsg(L"       s-.yshoyyhdmdhy+shyyyyosmmy      \n");
-	bodymsg(L"       `..+hs//:yoyyds+/:.:y+so+/.      "); bodymsg(music[DECESION_MUSIC_SRL].title); bodymsg(L"\n");
-	bodymsg(L"          .:o-.:s:--//---://-:++:       \n");
-	bodymsg(L"           .:+:::/:--::::::::::.        "); bodymsg(music[DECESION_MUSIC_SRL].artist); bodymsg(L"\n");
+	bodymsg(L"       s-.ysh.━━mdhy+shy ━┛smmy         \n");
+	bodymsg(L"       `..+hs  ご oyyds+.  ご +so+/.      "); bodymsg(music[DECESION_MUSIC_SRL].title); bodymsg(L"\n");
+	bodymsg(L"           .:o    -——//—:    :++:       \n");
+	bodymsg(L"           .:+:::/:--::::::::::.          "); bodymsg(music[DECESION_MUSIC_SRL].artist); bodymsg(L"\n");
 	bodymsg(L"             `----:so+:-:--++:`         \n");
 	bodymsg(L"                `.-::::/+:-/-.`         \n");
 	bodymsg(L"               :oosyyyyyos///:os/`      \n");
@@ -281,7 +268,7 @@ void PlayMode(int questnum) {
 	bodymsg(L"            .yhhhhs+yhhhysssooosyo      \n");
 	bodymsg(L"           `ydhhhhhhhhhhhhhdhso++`      이노래 아닌데;; - N을 눌러 계속 진행하기\n");
 	bodymsg(L"           /hhhhhyohhhhhhhhh-           \n");
-	bodymsg(L"           +yhhdhhyhhhhhhhhd-           이거 맞아요 - <ESC>를 눌러 게임 종료하기\n");
+	bodymsg(L"           +yhhdhhyhhhhhhhhd-           이거 맞아요 - <ESC>를 길게 눌러 게임 종료하기\n");
 	bodymsg(L"           ohhhhhhhhhhhhhhhy`           \n");
 	bodymsg(L"          .hhhhyyshhhhhhhhhh+           \n");
 	bodymsg(L"          :hhysyyshhhhhhhhhhh.          \n");
@@ -292,7 +279,7 @@ void PlayMode(int questnum) {
 
 	while (1)
 	{
-		noecho();
+		//noecho();
 		keypad(stdscr, TRUE);
 		
 
@@ -317,7 +304,7 @@ void PlayMode(int questnum) {
 		case KEY_ESC:
 			quit = TRUE;
 			clsbody();
-			bodymsg(L"\n\n\n\n\n\nESC를 눌러 플레ddd이를 종료했습니다.");
+			bodymsg(L"\n\n\n\n\n\nESC를 눌러 플레이를 종료했습니다.");
 
 		}
 
@@ -344,15 +331,15 @@ void PlayMode(int questnum) {
 	bodymsg(L"                                /:      \n");
 	bodymsg(L"                   `.-----.`    oys.    \n");
 	bodymsg(L"               ./oyddddddddhy+-`yyo``   \n");
-	bodymsg(L"     `.-:::-./ydmmmmmmmmmmmmmmdyhs:-  ====================================================================  \n");
+	bodymsg(L"     `.-:::-./ydmmmmmmmmmmmmmmdyhs:-  ===============================================  \n");
 	bodymsg(L"     ` `:+sydmmmmmmmmmmmmmmmmdmmdo     때려쳤습니다.\n");
-	bodymsg(L"     `+hhhhdmmmmdmmmmmmmmmmmmdhddh:   ====================================================================   \n");
-	bodymsg(L"    `ys/yddmdmmmhdmmmmmmmmmmmmmmmd+     제 명석한 두뇌를 바탕으로 곰곰히 고민해 보았지만,\n");
-	bodymsg(L"    :- ssomsdsymmddymddhyydmhdmmmm:     당신이 생각하는 게 뭔지 알래야 알수가 없습니다.\n");
+	bodymsg(L"     `+hhhhdmmmmdmmmmmmmmmmmmdhddh:   ===============================================  \n");
+	bodymsg(L"    `ys/yddmdmmmhdmmmmmmmmmm┛ ┗md+     제 명석한 두뇌를 바탕으로 곰곰히 고민해 보았지만,\n");
+	bodymsg(L"    :- ssomsdsymmddymddhyydm┓ ┏mm:     당신이 생각하는 게 뭔지 알래야 알수가 없습니다.\n");
 	bodymsg(L"       s-.yshoyyhdmdhy+shyyyyosmmy      그나마 추론 가능한 음악들을 뽑아놨으니, 당신이 찾는 음악이 있길 바랍니다.\n");
-	bodymsg(L"       `..+hs//:yoyyds+/:.:y+so+/.      \n");
-	bodymsg(L"          .:o-.:s:--//---://-:++:       \n");
-	bodymsg(L"           .:+:::/:--::::::::::.        1. "); bodymsg(music[DECESION_MUSIC_SRL].title); bodymsg(L" - "); bodymsg(music[DECESION_MUSIC_SRL].artist); bodymsg(L"\n");
+	bodymsg(L"       `..+hs  ━oyyds+.  ━+so+/.      \n");
+	bodymsg(L"          .:o    -——//—:    :++:       \n");
+	bodymsg(L"            .:+:::/:—::::::::::.        1. "); bodymsg(music[DECESION_MUSIC_SRL].title); bodymsg(L" - "); bodymsg(music[DECESION_MUSIC_SRL].artist); bodymsg(L"\n");
 		bodymsg(L"             `----:so+:-:--++:`         2. "); bodymsg(music[SECOND_MUSIC_SRL].title); bodymsg(L" - "); bodymsg(music[SECOND_MUSIC_SRL].artist); bodymsg(L"\n");
 	bodymsg(L"                `.-::::/+:-/-.`         \n");
 	bodymsg(L"               :oosyyyyyos///:os/`      \n");
