@@ -75,11 +75,10 @@ SndChannel *mChannel = NULL;
 COMMAND command[MAX_OPTIONS] =
 {
 	{ L"<예 그렇습니다>", AnswerYes },
+	{ L"<아닌데요>", AnswerNo },
 	{ L"<그런거 같습니다>", AnswerMaybeYes },
-	{ L"<모르겠습니다>", AnswerUnknown },
 	{ L"<아닌거 같습니다>", AnswerMaybeNot },
-	{ L"<아닌데요>", AnswerNo }
-
+	{ L"<모르겠습니다>", AnswerUnknown }
 };
 
 /*
