@@ -1,5 +1,9 @@
 #include "fmod.h"
-#include <unistd.h>
+#ifdef _MSC_VER
+    #include <windows.h>
+#else
+    #include <unistd.h>
+#endif
 #include "playm.h"
 
 #define NULL (void *)0
@@ -19,8 +23,24 @@ void playm_createSystem(FMOD_SYSTEM **sys){
 void getSoundPath(char out[600],char fileName[200]){
     //char mPath[420];
     char nowDir[399];
-    getcwd(nowDir,398);
     char c;
+    #ifdef _MSC_VER
+    /* Windows */
+    GetModuleFileName(NULL, nowDir, 398);
+    char *pExe = &nowDir[0];
+    while(*(pExe++) != '\0');
+    while(*(--pExe) != '\\'){
+        *(pExe) = '\0';
+    }
+    #else
+    /* *nix */
+    if(getcwd(nowDir,398) == NULL){
+        nowDir[0] = '.';
+        nowDir[1] = '/';
+        nowDir[2] = '\0';
+    }
+    #endif
+
     char *pPath = nowDir;
     int i = 0;
     while((c=*pPath++) != '\0'){
