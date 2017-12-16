@@ -437,6 +437,7 @@ void PlayMode(int questnum) {
 		 playm_createSystem(&mSystem);
 	 }
 	 playm_playSoundWC(mSystem,&mSound,&mChannel,music_playing,1);
+	 playm_setVolume(mChannel,0.4);
 
 	 QUESTION_SRL = 0;
 	 QUESTION_TRY_COUNT = 0;

@@ -13,6 +13,8 @@ void playm_playSound(FMOD_SYSTEM *,FMOD_SOUND **,char [200], int);
 void playm_playSoundWC(FMOD_SYSTEM *,FMOD_SOUND **,FMOD_CHANNEL **,char [200], int);
 void playm_pauseChannel(FMOD_CHANNEL *,int);
 int playm_getPaused(FMOD_CHANNEL *);
+void playm_setVolume(FMOD_CHANNEL *, float);
+
 void playm_stopSound(FMOD_SOUND *);
 void playm_destorySystem(FMOD_SYSTEM *);
 
@@ -86,4 +88,7 @@ void playm_stopSound(FMOD_SOUND *sound){
 void playm_destorySystem(FMOD_SYSTEM *sys){
     FMOD_System_Close(sys);
     FMOD_System_Release(sys);
+}
+void playm_setVolume(FMOD_CHANNEL *channel, float volume){
+	FMOD_Channel_SetVolume(channel,volume);
 }
