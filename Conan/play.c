@@ -55,6 +55,7 @@ typedef struct command {
 /*
  * Define variables
  */
+bool m_exit; // should I exit?
 int Point[100];//포인트 초기화 음악 갯수대로
 int TAGS_COUNT;
 int TAGS_MAX_COUNT;
@@ -132,7 +133,6 @@ int listbox()
 {
 	WINDOW *win;
 	int key, old_option = -1, new_option = 0, i;
-	bool quit = FALSE;
 
 
 
@@ -140,6 +140,8 @@ int listbox()
 
 	//erase();
 	display_menu(old_option, new_option);
+
+	bool loop_quit = FALSE;
 
 	while (1)
 	{
@@ -208,10 +210,10 @@ int listbox()
 			break;
 		case 'Q':
 		case 'q':
-			quit = TRUE;
+			//quit = TRUE;
 			break;
 		case KEY_ESC:
-			quit = TRUE;
+			//quit = TRUE;
 			clsbody();
 			bodymsg(L"\n\n\n\n\n\nESC를 눌러 플레이를 종료했습니다.");
 			break;
@@ -219,7 +221,7 @@ int listbox()
 		}
 
 
-		if (quit == TRUE) {
+		if (m_exit == TRUE) {
 
 			break;
 
@@ -337,24 +339,25 @@ void PlayMode(int questnum) {
 	bodymsg(L"          .:oooosyyhhhhhhhyyo`          ");
 
 	int key;
-	bool quit = FALSE;
+
+	bool loop_q = FALSE;
 
 	while (1)
 	{
 		//noecho();
 		keypad(stdscr, TRUE);
-		
+
 
 		key = getch();
 
 		switch (key)
 		{
-		
-		
 
-		
+
+
+
 		case 'n':
-			quit = TRUE;
+			loop_q = TRUE;
 			//이어서 하기
 			//게임 모드 재설정
 			PLAY_STATUS = 1;
@@ -364,14 +367,14 @@ void PlayMode(int questnum) {
 
 			break;
 		case KEY_ESC:
-			quit = TRUE;
+			loop_q = TRUE;
+			m_exit = TRUE;
 			clsbody();
 			bodymsg(L"\n\n\n\n\n\nESC를 눌러 플레이를 종료했습니다.");
-
 		}
 
 
-		if (quit == TRUE) {
+		if (loop_q == TRUE) {
 
 			break;
 
@@ -424,6 +427,7 @@ void PlayMode(int questnum) {
 
  void initPlay() {
 	//처음 플레이 하는 경우
+	 m_exit = FALSE;
 /*
 	 SndSystem *mSystem = NULL;
 	 SndSound *mSound = NULL;
@@ -468,7 +472,9 @@ void PlayMode(int questnum) {
  void startPlay(int answernum) {
 	 //answernum 0부터 정보없음, 아닌데요, 잘 모르겠습니다, 모르겠습니다. 그럴겁니다. 맞습니다.
 	
-	 
+	 if(m_exit == TRUE){
+		 return;
+	 }
 
 	 
 
@@ -502,7 +508,7 @@ void PlayMode(int questnum) {
 		 beep();
 		 clsbody();
 		 closeQuest();
-		 bodymsg("\n\n\n\n\n종료 요청이 들어와 플레이가 종료되었습니다.");
+		 bodymsg(L"\n\n\n\n\n종료 요청이 들어와 플레이가 종료되었습니다.");
 	 }
 
 
