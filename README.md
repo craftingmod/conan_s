@@ -4,7 +4,13 @@
 - 이 fork는 비공식 빌드입니다.
 
 # 사용법
-- 아직 없음
+    
+![](https://github.com/craftingmod/conan_s/raw/develop/Image/Conan_1.png)
+
+의 선택을 거쳐
+
+![](https://github.com/craftingmod/conan_s/raw/develop/Image/Conan_r.png)
+ 
 
 # Used Library
 - **[PDCurses](https://github.com/Bill-Gray/PDCurses/)** TUI
