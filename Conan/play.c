@@ -42,6 +42,8 @@ int decesion(int, int);
 int getQuestionNumber(void);
 int ASearch(const int [], int,int);
 
+void postEye(wchar_t *,int,wchar_t);
+
 /*
  * Define structure
  */
@@ -63,6 +65,7 @@ int QUESTION_TRY_COUNT; //지금까지 한 질문 횟수
 int SELECTED_ANSWER;
 int readyForShowResult; //0: not yet 1:thinking 2: result
 int readyForShowResultCount;
+int beforeEye; //before eye position
 
 SndSystem *mSystem = NULL;
 SndSound *mSound = NULL;
@@ -245,6 +248,26 @@ void PlayMode(int questnum) {
 	beep();
 	clsbody();
 
+	int eyerand;
+	if(readyForShowResult == 2){
+		eyerand = 2;
+	}else{
+		while((eyerand = getRandInt(0, 5)) == beforeEye);
+	}
+	beforeEye = eyerand;
+	wchar_t eye1[] = L"       `..+hs#   oyyds+.#   +so+/.      \n";
+	wchar_t eye2[] = L"          .:o#   -——//—:#   :++:        \n";
+	wchar_t eyemote = *((readyForShowResult != 2)?L"●":L"╂");
+
+	if(eyerand >= 3){
+		eyerand -= 3;
+		postEye(&eye2[0],eyerand,eyemote);
+		postEye(&eye1[0],-1,eyemote);
+	}else{
+		postEye(&eye1[0],eyerand,eyemote);
+		postEye(&eye2[0],-1,eyemote);
+	}
+
 	bodymsg(L"                                /:      \n");
 	bodymsg(L"                   `.-----.`    oys.    \n");
 	bodymsg(L"               ./oyddddddddhy+-`yyo``   \n");
@@ -254,13 +277,8 @@ void PlayMode(int questnum) {
 	bodymsg(L"    `ys/yddmdmmmhdmmmmmmmmmmmmmmmd+     \n");
 	bodymsg(L"    :- ssomsdsymmddymddhyydmhdmmmm:     \n");
 	bodymsg(L"       s-.yshoyyhdmdhy+shyyyyosmmy      \n");
-	if (readyForShowResult != 2) {
-		bodymsg(L"       `..+hs  ●oyyds+.  ● +so+/.      \n");
-	}else{
-		bodymsg(L"       `..+hs  ╂oyyds+.  ╂ +so+/.      \n");
-	}
-	bodymsg(L"       `..+hs//:yoyyds+/:.:y+so+/.      \n");
-	bodymsg(L"          .:o-.:s:--//---://-:++:       \n");
+/*	bodymsg(L"       `..+hs    oyyds+.    +so+/.      \n"); */	bodymsg(eye1);
+/*  bodymsg(L"          .:o    -——//—:    :++:        \n"); */	bodymsg(eye2);
 	bodymsg(L"           .:+:::/:--::::::::::.        \n");
 	bodymsg(L"             `----:so+:-:--++:`         \n");
 	bodymsg(L"                `.-::::/+:-/-.`         \n");
@@ -299,8 +317,8 @@ void PlayMode(int questnum) {
 	bodymsg(L"     `+hhhhdmmmmdmmmmmmmmmmmmdhddh:    진실은 언제나 단 하나뿐이니까. \n");
 	bodymsg(L"    `ys/yddmdmmmhdmmmmmmmmmmmmmmmd+   =======================================================  \n");
 	bodymsg(L"    :- ssomsdsymmddymddhyydmhdmmmm:     \n");
-	bodymsg(L"       s-.ysh.━━mdhy+shy ━┛smmy         \n");
-	bodymsg(L"       `..+hs  ご oyyds+.  ご +so+/.      "); bodymsg(music[DECESION_MUSIC_SRL].title); bodymsg(L"\n");
+	bodymsg(L"       s-.ysh.━━mdhy+s ━┛smmy         \n");
+	bodymsg(L"       `..+hs  ご oyyds+. ご +so+/.      "); bodymsg(music[DECESION_MUSIC_SRL].title); bodymsg(L"\n");
 	bodymsg(L"           .:o    -——//—:    :++:       \n");
 	bodymsg(L"           .:+:::/:--::::::::::.          "); bodymsg(music[DECESION_MUSIC_SRL].artist); bodymsg(L"\n");
 	bodymsg(L"             `----:so+:-:--++:`         \n");
@@ -441,6 +459,7 @@ void PlayMode(int questnum) {
 	 readyForShowResult = FALSE;
 	 APEX_POINT = 0;
 	 readyForShowResultCount = 0;
+	 beforeEye = -1;
 
 	 PLAY_STATUS = 1;
 	 startPlay(0);
@@ -512,9 +531,28 @@ void closeQuest(){
 	mSystem = NULL;
 }
 
+void postEye(wchar_t eye[],int position,wchar_t emote){
+	wchar_t *peye = &eye[0];
+	int offset = 0;
+	int shop = 0;
+	while(*(++peye) != '\0'){
+		*(peye) = *(peye+offset);
+		if(*peye == '#' && shop == 0){
+			if(position >= 0){
+				shop = position+1;
+				offset += 1;
+			}
+			*peye = ' ';
+		}
+		if(shop == 1){
+			*peye = emote;
+			shop = 0;
+		}else if(shop >= 2){
+			shop -= 1;
+		}
+	}
 
-
- 
+}
 
 
 
