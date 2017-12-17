@@ -268,3 +268,5 @@ Conan2/
 **/.cproject
 #TUI Demo
 TUI_Demo/
+#Idea
+**/out/
