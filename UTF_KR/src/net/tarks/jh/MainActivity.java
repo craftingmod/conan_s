@@ -9,6 +9,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.prefs.Preferences;
 
@@ -32,7 +33,7 @@ public class MainActivity extends Application {
         stage.setResizable(true);
         stage.setAlwaysOnTop(false);
         stage.setIconified(false);
-        scene = new Scene(root, 180, 160);
+        scene = new Scene(root, 180, 166);
 
         controller = loader.getController();
         pref = Preferences.userNodeForPackage(this.getClass());
@@ -47,6 +48,7 @@ public class MainActivity extends Application {
         controller.swt_euckr.setToggleGroup(group);
         controller.btn.setOnMouseClicked(event -> {
             System.out.printf("Hello %.2f\n",Math.random()*100);
+            new Conv(new File("/Users/superuser/Downloads/conan_s-develop/conan_s-develop/Conan"));
         });
 
         stage.setScene(scene);

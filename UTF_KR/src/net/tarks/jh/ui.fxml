@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainContent" stylesheets="/net/tarks/jh/ui.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.tarks.jh.MainController">
+<AnchorPane fx:id="mainContent" stylesheets="/JMetroDarkTheme.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.tarks.jh.MainController">
    <GridPane fx:id="grid" hgap="10.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
          <RadioButton fx:id="swt_utf8" mnemonicParsing="false" text="UTF-8" GridPane.rowIndex="0">
@@ -51,7 +51,12 @@
          <Button fx:id="btn" alignment="CENTER" mnemonicParsing="false" text="Apply" textAlignment="CENTER" GridPane.rowIndex="3">
             <GridPane.margin>
                <Insets top="5.0" />
-            </GridPane.margin></Button>
+            </GridPane.margin>
+            <font>
+               <Font name="NanumGothic" size="14.0" />
+               <Font name="Apple SD Gothic Neo Medium" size="14.0" />
+            </font>
+         </Button>
       </children>
       <columnConstraints>
          <ColumnConstraints />
