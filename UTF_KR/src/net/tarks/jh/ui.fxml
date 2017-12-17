@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -12,7 +13,7 @@
 <AnchorPane fx:id="mainContent" stylesheets="/JMetroDarkTheme.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.tarks.jh.MainController">
    <GridPane fx:id="grid" hgap="10.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
-         <RadioButton fx:id="swt_utf8" mnemonicParsing="false" text="UTF-8" GridPane.rowIndex="0">
+         <RadioButton fx:id="swt_utf8" mnemonicParsing="false" text="UTF-8" GridPane.columnIndex="0" GridPane.rowIndex="0">
             <GridPane.margin>
                <Insets />
             </GridPane.margin>
@@ -24,7 +25,7 @@
                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
          </RadioButton>
-         <RadioButton fx:id="swt_cp949" mnemonicParsing="false" text="CP949" GridPane.rowIndex="1">
+         <RadioButton fx:id="swt_utf16" mnemonicParsing="false" text="UTF-16" GridPane.columnIndex="1" GridPane.rowIndex="0">
             <GridPane.margin>
                <Insets />
             </GridPane.margin>
@@ -36,7 +37,7 @@
                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
          </RadioButton>
-         <RadioButton fx:id="swt_euckr" mnemonicParsing="false" text="EUC-KR" GridPane.rowIndex="2">
+         <RadioButton fx:id="swt_euckr" mnemonicParsing="false" text="EUC-KR" GridPane.columnIndex="0" GridPane.rowIndex="1">
             <GridPane.margin>
                <Insets />
             </GridPane.margin>
@@ -48,9 +49,27 @@
                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
          </RadioButton>
-         <Button fx:id="btn" alignment="CENTER" mnemonicParsing="false" text="Apply" textAlignment="CENTER" GridPane.rowIndex="3">
+          <RadioButton fx:id="swt_show" mnemonicParsing="false" text="View" GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <GridPane.margin>
+                  <Insets />
+              </GridPane.margin>
+              <font>
+                  <Font name="NanumGothic" size="14.0" />
+                  <Font name="Apple SD Gothic Neo Medium" size="14.0" />
+              </font>
+              <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+              </padding>
+          </RadioButton>
+         <CheckBox fx:id="chk_ex" mnemonicParsing="false" text="Exclusive" GridPane.columnIndex="0" GridPane.rowIndex="2">
+             <padding>
+                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+             </padding>
+         </CheckBox>
+         <Button fx:id="btn" alignment="CENTER" mnemonicParsing="false" text="Apply" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <GridPane.margin>
                <Insets top="5.0" />
+                <Insets left="5.0" />
             </GridPane.margin>
             <font>
                <Font name="NanumGothic" size="14.0" />
@@ -59,6 +78,7 @@
          </Button>
       </children>
       <columnConstraints>
+         <ColumnConstraints />
          <ColumnConstraints />
       </columnConstraints>
       <rowConstraints>
