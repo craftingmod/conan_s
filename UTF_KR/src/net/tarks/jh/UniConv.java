@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class UniConv {
-    private static final String[] whitelist = {"c","cpp","h","txt"};
+    private static final String[] _whitelist = {"c","cpp","h","txt"};
     public static final int UTF8 = 1;
     public static final int CP949 = 2;
     public static final int EUCKR = 3;
@@ -39,22 +39,48 @@ public class UniConv {
     private onCompleteListener errorHandler;
     private ArrayList<FData> convFiles;
     private ArrayList<File> loadFiles;
+    private ArrayList<String> whitelist;
+    private boolean exclusive;
     private int que;
     public UniConv(File dir){
         rootDir = dir;
         errorHandler = null;
         convFiles = new ArrayList<>();
+        whitelist = new ArrayList<>();
+        whitelist.addAll(Arrays.asList(_whitelist));
+        exclusive = false;
+    }
+    public void defineExt(String[] exts){
+        whitelist.clear();
+        whitelist.addAll(Arrays.asList(exts));
     }
     public File getRootDir(){
         return rootDir;
     }
+    public void setRootDir(File f){
+        rootDir = f;
+    }
+    public void setExclusive(boolean ex){
+        exclusive = ex;
+    }
     public void handleError(final onCompleteListener eL){
         errorHandler = eL;
     }
-    public void convert(final String charsetN,final onCompleteListener listener){
-        convert(charsetN, listener,true,false);
+    public void read(final onCompleteListener listener,boolean ex){
+        setExclusive(ex);
+        read(listener);
     }
-    public void convert(final String charsetN,final onCompleteListener listener,boolean encode,boolean exclusive){
+    public void read(final onCompleteListener listener){
+        convert(null, listener,false);
+    }
+    public void convert(final String charsetN,final onCompleteListener listener){
+        convert(charsetN, listener,true);
+    }
+    public void convert(final String charsetN,final onCompleteListener listener,boolean encode,boolean ex){
+        setExclusive(ex);
+        convert(charsetN, listener, encode);
+    }
+    public void convert(final String charsetN,final onCompleteListener listener,boolean encode){
         convFiles.clear();
         que = 0;
 
@@ -71,12 +97,15 @@ public class UniConv {
             }else if(!encode){
                 listener.onComplete(COM_READ_ALL, encodings);
             }else if(type == COM_READ_ALL){
+                System.out.println("Root Directory: " + getRootDir().getAbsolutePath());
                 for(FData fdata : convFiles){
                     try{
                         if(!fdata.file.canWrite()){
                             throw new IOException("Can't write \"" + fdata.file.getAbsolutePath() + "\"");
                         }else{
-                            System.out.println("Write path: " + Paths.get(fdata.file.toURI()).toString() + " / Charset: " + charsetN);
+                            String charsetC = Charset.forName(charsetN).toString();
+                            System.out.printf("Write %s  ->  \"%s\"\n",charsetC,
+                                    fdata.file.getAbsolutePath().replace(getRootDir().getAbsolutePath(),"."));
                             write(fdata.file,fdata.text,charsetN);
                             //Files.write(Paths.get(fdata.file.toURI()),fdata.text,Charset.forName(charsetN), StandardOpenOption.SYNC,StandardOpenOption.WRITE);
                         }
@@ -88,6 +117,12 @@ public class UniConv {
             }
         };
         try {
+            if(loadFiles.size() <= 0){
+                System.out.println("No read..");
+                encode_I.onComplete(COM_READ_ALL,null);
+                que = -1;
+                return;
+            }
             getFileText(loadFiles.get(que), new onCompleteListener() {
                 @Override
                 public void onComplete(int type, Object data) {
@@ -129,7 +164,7 @@ public class UniConv {
         onCompleteListener internalL = (type, data) -> {
             if(type == COM_FILE_ENCODING){
                 String encoding = (String) data;
-                System.out.println(f.getAbsolutePath() +"'s Encoding: " + encoding);
+                //System.out.println(f.getAbsolutePath() +"'s Encoding: " + encoding);
                 try {
                     if(encoding.equalsIgnoreCase("windows-1252")){
                         // can't detect - utf-16 LE without BOM or utf-16 BE without BOM... or nothing
@@ -227,7 +262,7 @@ public class UniConv {
         }
         try {
             out = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(file), charset));
+                    new FileOutputStream(file), Charset.forName(charset)));
             int s = content.size();
             for(int i=0;i<s;i+=1){
                 out.write(content.get(i).replace("\r",""));

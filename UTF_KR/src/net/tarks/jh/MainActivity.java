@@ -34,7 +34,13 @@ public class MainActivity extends Application {
 
     @Override
     public void start(Stage stage) {
-        c = new UniConv(new File("/Users/superuser/Downloads/conan_s-develop/conan_s-develop/Conan"));
+        c = new UniConv(UniConv.getLaunchDir());
+        if(Main.rootFile != null){
+            c.setRootDir(Main.rootFile);
+        }
+        if(Main.extensions != null){
+            c.defineExt(Main.extensions.split(","));
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ui.fxml"));
 
         root = null;
@@ -44,7 +50,7 @@ public class MainActivity extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        stage.setTitle("UTF/EUC");
+        stage.setTitle("UniConv");
         stage.setResizable(true);
         stage.setAlwaysOnTop(false);
         stage.setIconified(false);
@@ -65,6 +71,9 @@ public class MainActivity extends Application {
         controller.swt_show.setToggleGroup(group);
 
         exclusive = pref.getBoolean("exclusive",false);
+        if(Main.exclusive_mode != null){
+            this.exclusive = Main.exclusive_mode;
+        }
         controller.chk_ex.setSelected(exclusive);
         controller.chk_ex.selectedProperty().addListener((o, ov, newValue) -> {
             exclusive = newValue;
@@ -91,15 +100,22 @@ public class MainActivity extends Application {
                     StringBuilder sb = new StringBuilder();
                     ArrayList<FData> ecs = (ArrayList<FData>) data;
                     for(FData fd : ecs){
-                        sb.append("\"");
-                        sb.append(fd.file.getAbsolutePath().replace(c.getRootDir().getAbsolutePath(),"."));
-                        sb.append("\" Encoding -> ");
-                        if(fd.text.size() >= 1){
-                            sb.append(fd.text.get(0));
-                        }else{
-                            sb.append("null");
+                        String enc = fd.text.size() >= 1 ? fd.text.get(0) : "Null";
+                        StringBuilder tab = new StringBuilder();
+                        for(int i=enc.length()/5;i<3;i+=1){
+                            tab.append("\t");
                         }
-                        sb.append("\n");
+                        /*
+                                                StringBuilder tab = new StringBuilder();
+                        for(int i=e.length()/4;i<4;i+=1){
+                            tab.append("\t");
+                        }
+                        System.out.printf(" %s%s ->  \"%s\"\n",e,tab.toString(),
+                                fd.file.getAbsolutePath().replace(converter.getRootDir().getAbsolutePath(),"."));
+                         */
+                        sb.append(enc).append(tab.toString()).append(" ->  \"");
+                        sb.append(fd.file.getAbsolutePath().replace(c.getRootDir().getAbsolutePath(),"."));
+                        sb.append("\"\n");
                     }
                     StringBuilder sb_subT = new StringBuilder();
                     sb_subT.append("Directory: ").append(c.getRootDir().getAbsolutePath()).append("\n");

@@ -1158,7 +1158,6 @@
     -fx-background-color: #2a2a2a;
 }
 .header-panel *.label{
-    -fx-font-style: bold;
     -fx-text-fill: white;
 }
 .dialog-pane > .label {
