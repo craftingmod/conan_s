@@ -51,7 +51,7 @@ public class MainActivity extends Application {
             e.printStackTrace();
         }
         stage.setTitle("UniConv");
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.setAlwaysOnTop(false);
         stage.setIconified(false);
         scene = new Scene(root, 232, 128);
