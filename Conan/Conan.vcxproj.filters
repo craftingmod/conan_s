@@ -42,6 +42,15 @@
     <ClInclude Include="data.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="config_conan.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="gui_splash.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="playm.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.c">
@@ -66,6 +75,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="data.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="config_conan.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="gui_splash.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="playm.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

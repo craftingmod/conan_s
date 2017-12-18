@@ -1,10 +1,12 @@
 #include "fmod.h"
 #ifdef _MSC_VER
     #include <windows.h>
+	#include <wchar.h>
 #else
     #include <unistd.h>
 #endif
 #include "playm.h"
+
 
 #define NULL (void *)0
 
@@ -22,18 +24,24 @@ void playm_createSystem(FMOD_SYSTEM **sys){
     FMOD_System_Create(sys);
     FMOD_System_Init(*sys,32,FMOD_INIT_NORMAL, NULL);
 }
-void getSoundPath(char out[600],char fileName[200]){
+void getSoundPath(char out[1000],char fileName[200]){
     //char mPath[420];
-    char nowDir[399];
+    char nowDir[799];
     char c;
     #ifdef _MSC_VER
     /* Windows */
-    GetModuleFileName(NULL, nowDir, 398);
-    char *pExe = &nowDir[0];
-    while(*(pExe++) != '\0');
-    while(*(--pExe) != '\\'){
-        *(pExe) = '\0';
+	wchar_t getDir[MAX_PATH];
+    GetModuleFileName(NULL, getDir, MAX_PATH);
+    wchar_t *pExe = &getDir[0];
+    while(*(pExe++) != L'\0');
+    while(*(--pExe) != L'\\'){
+        *(pExe) = L'\0';
     }
+	*(pExe) = L'\0';
+	pExe = &getDir[0];
+	int len = WideCharToMultiByte(CP_ACP, 0, getDir, -1, NULL, 0, NULL, NULL);
+	WideCharToMultiByte(CP_ACP, 0, getDir, -1, nowDir, len, NULL, NULL);
+
     #else
     /* *nix */
     if(getcwd(nowDir,398) == NULL){
@@ -62,7 +70,7 @@ void getSoundPath(char out[600],char fileName[200]){
     *(out+i) = '\0';
 }
 void playm_playSoundWC(FMOD_SYSTEM *sys,FMOD_SOUND **sound,FMOD_CHANNEL **channel,char fileName[200], int loop){
-	char mPath[600] = {};
+	char mPath[1000];
 	getSoundPath(mPath,fileName);
     FMOD_System_CreateSound(sys,mPath,FMOD_DEFAULT, 0, sound);
     FMOD_Sound_SetMode(*sound,loop?FMOD_LOOP_NORMAL:FMOD_LOOP_OFF);

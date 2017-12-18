@@ -175,7 +175,7 @@ static void idle(void)
         return;  /* time not available */
 
    // tp = localtime(&t);
-    char av[100] = {};
+    char av[100];
     int i = 0;
     char c;
     while((c = *(appversion+i)%128) != '\0'){

@@ -1,4 +1,4 @@
-﻿#include "appinfo.h"
+#include "appinfo.h"
 #include "config_conan.h"
 
 /****************************Appinfo ***************************/

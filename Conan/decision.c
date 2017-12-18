@@ -4,5 +4,3 @@
 #include "data.h"
 #include "tui.h"
 #include "play.h"
-
-

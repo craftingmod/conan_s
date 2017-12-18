@@ -8,6 +8,7 @@
 #include "tui.h"
 #include "play.h"
 #include "appinfo.h"
+#include "playm.h"
 
 /* change this if source at other location */
 

@@ -95,7 +95,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(ProjectDir)lib\pdcurses.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)lib\pdcurses.lib;$(ProjectDir)lib\fmod_vc.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -149,12 +149,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="appinfo.h" />
+    <ClInclude Include="config_conan.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="decision.h" />
+    <ClInclude Include="gui_splash.h" />
     <ClInclude Include="include\curses.h" />
     <ClInclude Include="include\panel.h" />
     <ClInclude Include="include\tui.h" />
     <ClInclude Include="play.h" />
+    <ClInclude Include="playm.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -163,12 +166,15 @@
     <ClCompile Include="C:\pd\demos\testcurs.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="config_conan.c" />
     <ClCompile Include="data.c" />
     <ClCompile Include="decision.c" />
+    <ClCompile Include="gui_splash.c" />
     <ClCompile Include="main.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="play.c" />
+    <ClCompile Include="playm.c" />
     <ClCompile Include="stdafx.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

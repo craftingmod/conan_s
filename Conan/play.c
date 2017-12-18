@@ -257,7 +257,7 @@ void PlayMode(int questnum) {
 	}
 	beforeEye = eyerand;
 	wchar_t eye1[] = L"       `..+hs#   oyyds+.#   +so+/.      \n";
-	wchar_t eye2[] = L"          .:o#   -——//—:#   :++:        \n";
+	wchar_t eye2[] = L"          .:o#   -??//?:#   :++:        \n";
 	wchar_t eyemote = *((readyForShowResult != 2)?L"●":L"╂");
 
 	if(eyerand >= 3){
@@ -279,7 +279,7 @@ void PlayMode(int questnum) {
 	bodymsg(L"    :- ssomsdsymmddymddhyydmhdmmmm:     \n");
 	bodymsg(L"       s-.yshoyyhdmdhy+shyyyyosmmy      \n");
 /*	bodymsg(L"       `..+hs    oyyds+.    +so+/.      \n"); */	bodymsg(eye1);
-/*  bodymsg(L"          .:o    -——//—:    :++:        \n"); */	bodymsg(eye2);
+/*  bodymsg(L"          .:o    -??//?:    :++:        \n"); */	bodymsg(eye2);
 	bodymsg(L"           .:+:::/:--::::::::::.        \n");
 	bodymsg(L"             `----:so+:-:--++:`         \n");
 	bodymsg(L"                `.-::::/+:-/-.`         \n");
@@ -320,7 +320,7 @@ void PlayMode(int questnum) {
 	bodymsg(L"    :- ssomsdsymmddymddhyydmhdmmmm:     \n");
 	bodymsg(L"       s-.ysh.━━mdhy+s ━┛smmy         \n");
 	bodymsg(L"       `..+hs  ご oyyds+. ご +so+/.      "); bodymsg(music[DECESION_MUSIC_SRL].title); bodymsg(L"\n");
-	bodymsg(L"           .:o    -——//—:    :++:       \n");
+	bodymsg(L"           .:o    -??//?:    :++:       \n");
 	bodymsg(L"           .:+:::/:--::::::::::.          "); bodymsg(music[DECESION_MUSIC_SRL].artist); bodymsg(L"\n");
 	bodymsg(L"             `----:so+:-:--++:`         \n");
 	bodymsg(L"                `.-::::/+:-/-.`         \n");
@@ -402,8 +402,8 @@ void PlayMode(int questnum) {
 	bodymsg(L"    :- ssomsdsymmddymddhyydm┓ ┏mm:     당신이 생각하는 게 뭔지 알래야 알수가 없습니다.\n");
 	bodymsg(L"       s-.yshoyyhdmdhy+shyyyyosmmy      그나마 추론 가능한 음악들을 뽑아놨으니, 당신이 찾는 음악이 있길 바랍니다.\n");
 	bodymsg(L"       `..+hs  ━oyyds+.  ━+so+/.      \n");
-	bodymsg(L"          .:o    -——//—:    :++:       \n");
-	bodymsg(L"            .:+:::/:—::::::::::.        1. "); bodymsg(music[DECESION_MUSIC_SRL].title); bodymsg(L" - "); bodymsg(music[DECESION_MUSIC_SRL].artist); bodymsg(L"\n");
+	bodymsg(L"          .:o    -??//?:    :++:       \n");
+	bodymsg(L"            .:+:::/:?::::::::::.        1. "); bodymsg(music[DECESION_MUSIC_SRL].title); bodymsg(L" - "); bodymsg(music[DECESION_MUSIC_SRL].artist); bodymsg(L"\n");
 		bodymsg(L"             `----:so+:-:--++:`         2. "); bodymsg(music[SECOND_MUSIC_SRL].title); bodymsg(L" - "); bodymsg(music[SECOND_MUSIC_SRL].artist); bodymsg(L"\n");
 	bodymsg(L"                `.-::::/+:-/-.`         \n");
 	bodymsg(L"               :oosyyyyyos///:os/`      \n");
